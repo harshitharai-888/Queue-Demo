@@ -20,6 +20,9 @@ public class UsersController : ControllerBase
     {
         await _queue.EnqueueAsync(user);
 
-        return Ok("User added to queue");
+        HttpContext.Session.SetString("UserName", user.Name);
+        HttpContext.Session.SetString("UserEmail", user.Email);
+
+        return Ok("User added to queue and session stored");
     }
 }
